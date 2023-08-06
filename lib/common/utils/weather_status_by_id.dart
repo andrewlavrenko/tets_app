@@ -15,6 +15,6 @@ WeatherStatus weatherStatusById(int id) {
     case 800:
       return WeatherStatus.sun;
     default:
-      return WeatherStatus.sun;
+      return WeatherStatus.cloud;
   }
 }

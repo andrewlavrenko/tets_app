@@ -13,7 +13,11 @@ class HomeLoading extends HomeState {}
 
 class HomeLoaded extends HomeState {
   final Weather weather;
-  const HomeLoaded({required this.weather});
+  final List<HourlyWeather> hourlyWeathers;
+  const HomeLoaded({
+    required this.weather,
+    required this.hourlyWeathers,
+  });
 }
 
 class HomeError extends HomeState {}

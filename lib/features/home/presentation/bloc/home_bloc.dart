@@ -22,14 +22,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (isGranted) {
       final position = await Geolocator.getCurrentPosition();
       final address = await placemarkFromCoordinates(position.latitude, position.longitude, localeIdentifier: 'ru_RU');
-      await repository.getWeather(lat: position.latitude, lon: position.longitude).then(
-            (weather) => emit(
-              HomeLoaded(
-                weather: weather.copyWith(address: '${weather.address ?? ''}, ${address.first.country ?? ''}'),
-              ),
-            ),
-            onError: (error) => emit(HomeError()),
-          );
+      await repository.getHourlyWeathers(lat: position.latitude, lon: position.longitude).then(
+        (list) async {
+          await repository.getWeather(lat: position.latitude, lon: position.longitude).then(
+                (weather) => emit(
+                  HomeLoaded(
+                    weather: weather.copyWith(address: '${weather.address ?? ''}, ${address.first.country ?? ''}'),
+                    hourlyWeathers: list,
+                  ),
+                ),
+                onError: (error) => emit(HomeError()),
+              );
+        },
+        onError: (error) => emit(HomeError()),
+      );
     } else {
       emit(HomeError());
     }

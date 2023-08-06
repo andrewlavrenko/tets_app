@@ -1,1 +1,1 @@
-enum WeatherStatus { sun, rain, snow, drizzle, thunderstorm, rainWithSun }
+enum WeatherStatus { sun, rain, snow, drizzle, thunderstorm, rainWithSun, cloud }

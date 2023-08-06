@@ -2,6 +2,40 @@ import 'package:equatable/equatable.dart';
 import 'package:test_app/common/enums/weather_unit.dart';
 import 'package:test_app/common/utils/weather_status_by_id.dart';
 
+class HourlyWeather extends Equatable {
+  final Temperature? temperature;
+  final List<Condition> conditions;
+  final DateTime? date;
+  const HourlyWeather({
+    required this.temperature,
+    required this.conditions,
+    required this.date,
+  });
+  HourlyWeather copyWith({
+    Temperature? temperature,
+    List<Condition>? conditions,
+    DateTime? date,
+  }) =>
+      HourlyWeather(
+        temperature: temperature ?? this.temperature,
+        conditions: conditions ?? this.conditions,
+        date: date ?? this.date,
+      );
+
+  factory HourlyWeather.fromJson(Map<String, dynamic> json) => HourlyWeather(
+        temperature: Temperature.fromJson(json['main']),
+        conditions: List.from(json['weather']).map((el) => Condition.fromJson(el)).toList(),
+        date: json['dt'] != null ? DateTime.fromMillisecondsSinceEpoch((json['dt'] as int) * 1000) : null,
+      );
+
+  @override
+  List<Object?> get props => [
+        temperature,
+        conditions,
+        date,
+      ];
+}
+
 class Weather extends Equatable {
   final Temperature? temperature;
   final Wind? wind;

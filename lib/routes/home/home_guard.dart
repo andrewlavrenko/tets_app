@@ -1,5 +1,3 @@
-// ignore_for_file: literal_only_boolean_expressions
-
 import 'package:auto_route/auto_route.dart';
 import 'package:test_app/common/injectable/injectable_init.dart';
 import 'package:test_app/features/auth/domain/repository.dart';

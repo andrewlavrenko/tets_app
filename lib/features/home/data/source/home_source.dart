@@ -22,4 +22,21 @@ class HomeSource {
       rethrow;
     }
   }
+
+  Future<List<HourlyWeather>> getHourlyWeathers({required double lat, required double lon}) async {
+    try {
+      var response = await http.get(
+        Uri.parse(
+          '${Config.api}forecast?lat=$lat&lon=$lon&appid=${Config.key}&units=${Config.units}&lang=${Config.lang}',
+        ),
+      );
+
+      print('${Config.api}forecast?lat=$lat&lon=$lon&appid=${Config.key}&units=${Config.units}&lang=${Config.lang}');
+      Map<String, dynamic> data = jsonDecode(response.body);
+      print(data);
+      return List.from(data['list']).map((el) => HourlyWeather.fromJson(el)).toList();
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
