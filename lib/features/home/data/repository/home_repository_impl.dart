@@ -17,4 +17,16 @@ class HomeRepositoryImpl extends HomeRepository {
   Future<List<HourlyWeather>> getHourlyWeathers({required double lat, required double lon}) {
     return _source.getHourlyWeathers(lat: lat, lon: lon);
   }
+
+
+  @override
+  Future<Weather?> getLocalWeather() {
+    return _source.getLocalWeather();
+  }
+
+
+  @override
+  Future<List<HourlyWeather>?> getLocalHourlyWeathers() {
+    return _source.getLocalHourlyWeathers();
+  }
 }

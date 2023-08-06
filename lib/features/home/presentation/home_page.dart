@@ -58,35 +58,92 @@ class HomePageBody extends StatelessWidget {
             context.loaderOverlay.show();
           } else if (state is HomeLoaded) {
             context.loaderOverlay.hide();
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  AddressWidget(address: state.weather.address),
-                  WeatherImageWidget(status: state.weather.conditions.first.status),
-                  TemperatureWidget(weather: state.weather),
-                  HourlyWeathersListWidget(
-                      hourlyWeathers: state.hourlyWeathers.where((element) => isToday(element.date)).toList()),
-                  WindAndHumidityWidget(
-                    speed: state.weather.wind?.speed,
-                    deg: state.weather.wind?.deg,
-                    humidity: state.weather.humidity,
-                  ),
-                ],
-              ),
+            return LoadedHomePageBody(
+              weather: state.weather,
+              hourlyWeathers: state.hourlyWeathers.where((element) => isToday(element.date)).toList(),
             );
           } else if (state is HomeError) {
             context.loaderOverlay.hide();
-            return Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  bloc.add(GetWeatherEvent());
-                },
-                child: const Text('Повторить'),
-              ),
+            return ErrorWidget(
+              message: state.message,
+              onPressed: () {
+                bloc.add(GetWeatherEvent());
+              },
             );
           }
           return const SizedBox.shrink();
         },
+      ),
+    );
+  }
+}
+
+class LoadedHomePageBody extends StatelessWidget {
+  final Weather weather;
+  final List<HourlyWeather> hourlyWeathers;
+  const LoadedHomePageBody({
+    Key? key,
+    required this.weather,
+    required this.hourlyWeathers,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          AddressWidget(address: weather.address),
+          WeatherImageWidget(status: weather.conditions.first.status),
+          TemperatureWidget(weather: weather),
+          HourlyWeathersListWidget(
+            hourlyWeathers: hourlyWeathers
+                .where(
+                  (element) => isToday(element.date),
+                )
+                .toList(),
+          ),
+          WindAndHumidityWidget(
+            speed: weather.wind?.speed,
+            deg: weather.wind?.deg,
+            humidity: weather.humidity,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ErrorWidget extends StatelessWidget {
+  final String message;
+  final void Function()? onPressed;
+  const ErrorWidget({
+    Key? key,
+    required this.message,
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            message,
+            style: const TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w500,
+              color: AppColors.white,
+              fontFamily: AppFontFamily.roboto,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          ElevatedButton(
+            onPressed: onPressed,
+            child: const Text('Повторить'),
+          ),
+        ],
       ),
     );
   }
@@ -164,10 +221,10 @@ class HourlyWeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return weather.date != null && weather.temperature?.temp !=null && weather.conditions.first.status != null
+    return weather.date != null && weather.temperature?.temp != null && weather.conditions.first.status != null
         ? Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
+            padding: const EdgeInsets.all(16),
+            child: Column(
               children: [
                 Text(
                   DateFormat('kk:mm').format(weather.date!),
@@ -192,7 +249,7 @@ class HourlyWeatherWidget extends StatelessWidget {
                 ),
               ],
             ),
-        )
+          )
         : const SizedBox.shrink();
   }
 }

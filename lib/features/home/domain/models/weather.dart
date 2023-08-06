@@ -66,6 +66,14 @@ class Weather extends Equatable {
         address: address ?? this.address,
       );
 
+  Map<String, dynamic> toJson() => {
+    'temperature': temperature,
+    'wind': wind,
+    'conditions': conditions,
+    'humidity': humidity,
+    'address': address,
+  };
+
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
         temperature: Temperature.fromJson(json['main']),
         wind: Wind.fromJson(json['wind']),
