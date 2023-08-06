@@ -20,5 +20,4 @@ import 'package:test_app/routes/home/home_wrapper.dart';
     ),
   ],
 )
-
 class $AppRouter {}

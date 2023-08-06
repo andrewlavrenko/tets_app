@@ -11,5 +11,7 @@ class AssetIcons {
   static const String icWind = 'assets/icons/wind.svg';
   static const String icHumidity = 'assets/icons/humidity.svg';
   static const String icPin = 'assets/icons/pin.svg';
+  static const String icEye = 'assets/icons/eye.svg';
+  static const String icEyeOff = 'assets/icons/eye_off.svg';
 
 }
