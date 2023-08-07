@@ -56,3 +56,16 @@ flutter:
           weight: 500
         - asset: assets/fonts/ubuntu-700.ttf
           weight: 700
+
+
+flutter_native_splash:
+  background_image: "assets/images/splash_background.png"
+  branding: "assets/images/splash_branding.png"
+  branding_mode: bottom
+  image: "assets/images/splash_big_image.png"
+  fullscreen: true
+  web: false
+  android_12:
+    image: "assets/images/splash_image.png"
+    branding: "assets/images/splash_branding.png"
+    color: "#0700FF"
