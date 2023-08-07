@@ -67,12 +67,12 @@ class Weather extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
-    'temperature': temperature,
-    'wind': wind,
-    'conditions': conditions,
-    'humidity': humidity,
-    'address': address,
-  };
+        'temperature': temperature,
+        'wind': wind,
+        'conditions': conditions,
+        'humidity': humidity,
+        'address': address,
+      };
 
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
         temperature: Temperature.fromJson(json['main']),
@@ -104,9 +104,9 @@ class Temperature extends Equatable {
   });
 
   factory Temperature.fromJson(Map<String, dynamic> json) => Temperature(
-        temp: json['temp'],
-        minTemp: json['temp_min'],
-        maxTemp: json['temp_max'],
+        temp: double.tryParse(json['temp'].toString()),
+        minTemp: double.tryParse(json['temp_min'].toString()),
+        maxTemp: double.tryParse(json['temp_max'].toString()),
       );
 
   @override
@@ -127,7 +127,7 @@ class Wind extends Equatable {
   });
 
   factory Wind.fromJson(Map<String, dynamic> json) => Wind(
-        speed: json['speed'],
+        speed: double.tryParse(json['speed'].toString()),
         deg: json['deg'],
       );
 
