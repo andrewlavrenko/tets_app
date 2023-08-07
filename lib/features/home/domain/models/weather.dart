@@ -93,9 +93,9 @@ class Weather extends Equatable {
 }
 
 class Temperature extends Equatable {
-  final double? temp;
-  final double? minTemp;
-  final double? maxTemp;
+  final int? temp;
+  final int? minTemp;
+  final int? maxTemp;
 
   const Temperature({
     required this.temp,
@@ -104,9 +104,9 @@ class Temperature extends Equatable {
   });
 
   factory Temperature.fromJson(Map<String, dynamic> json) => Temperature(
-        temp: double.tryParse(json['temp'].toString()),
-        minTemp: double.tryParse(json['temp_min'].toString()),
-        maxTemp: double.tryParse(json['temp_max'].toString()),
+        temp: double.tryParse(json['temp'].toString())?.round(),
+        minTemp: double.tryParse(json['temp_min'].toString())?.round(),
+        maxTemp: double.tryParse(json['temp_max'].toString())?.round(),
       );
 
   @override
@@ -118,7 +118,7 @@ class Temperature extends Equatable {
 }
 
 class Wind extends Equatable {
-  final double? speed;
+  final int? speed;
   final int? deg;
 
   const Wind({
@@ -127,7 +127,7 @@ class Wind extends Equatable {
   });
 
   factory Wind.fromJson(Map<String, dynamic> json) => Wind(
-        speed: double.tryParse(json['speed'].toString()),
+        speed: double.tryParse(json['speed'].toString())?.round(),
         deg: json['deg'],
       );
 

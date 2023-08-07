@@ -6,7 +6,7 @@ import 'package:test_app/common/utils/wind_direction.dart';
 import 'package:test_app/features/home/presentation/widgets/wind_and_humidity_item.dart';
 
 class WindAndHumidityWidget extends StatelessWidget {
-  final double? speed;
+  final int? speed;
   final int? deg;
   final int? humidity;
   const WindAndHumidityWidget({
@@ -30,7 +30,7 @@ class WindAndHumidityWidget extends StatelessWidget {
         children: [
           WindAndHumidityItem(
             icon: AssetIcons.icWind,
-            value: '${speed?.round() ?? 0} м/с',
+            value: '${speed ?? 0} м/с',
             title: 'Ветер ${windDirection(deg ?? 0)}',
           ),
           const SizedBox(height: 16),

@@ -33,7 +33,7 @@ class HourlyWeatherWidget extends StatelessWidget {
                 SvgPicture.asset(hourlyWeatherImageByStatus(weather.conditions.first.status, true)),
                 const SizedBox(height: 16),
                 Text(
-                  '${weather.temperature?.temp?.round()}',
+                  '${weather.temperature?.temp}',
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,

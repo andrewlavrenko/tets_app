@@ -15,7 +15,7 @@ class TemperatureWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '${weather.temperature?.temp?.round() ?? 0}º',
+          '${weather.temperature?.temp ?? 0}º',
           style: const TextStyle(
             fontSize: 64,
             fontWeight: FontWeight.w500,
@@ -33,7 +33,7 @@ class TemperatureWidget extends StatelessWidget {
           ),
         ),
         Text(
-          'Макс.: ${weather.temperature?.maxTemp?.round() ?? 0}º Мин: ${weather.temperature?.minTemp?.round() ?? 0}º',
+          'Макс.: ${weather.temperature?.maxTemp ?? 0}º Мин: ${weather.temperature?.minTemp ?? 0}º',
           style: const TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w400,
