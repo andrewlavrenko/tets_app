@@ -54,7 +54,7 @@ class HourlyWeathersListWidget extends StatelessWidget {
             height: 1,
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 16),
+            margin: const EdgeInsets.all(16),
             height: 138,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
